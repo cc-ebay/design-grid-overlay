@@ -5,11 +5,9 @@ A Chrome extension to overlay a design grid on your web page; configurable to fi
 
 ## Installation
 
-The [Design Grid Overlay](https://chrome.google.com/webstore/detail/design-grid-overlay/kmaadknbpdklpcommafmcboghdlopmbi) is available the Chrome Web store.
+Install from source:
 
-Or install via Git if you wish to contribute.
-
-* Clone the git repository to your local machine or download the zip file [ZIP](https://github.com/eBay/Design-Grid-Overlay/archive/master.zip) and unzip the folder.
+* Clone the git repository to your local machine or download the zip file [ZIP](https://github.com/cc-cc-ebay/design-grid-overlay/archive/master.zip) and unzip the folder.
 * After the folder is on your desktop, open Chrome.
 * Once Chrome is open, click the hamburger menu on the far right go to More tools, then click [Extensions](chrome://extensions/).
 * Once there, be sure the "Developer mode" box is checked and then at the top click "Load unpacked extension".
@@ -28,9 +26,14 @@ Or install via Git if you wish to contribute.
 * Aaron Kleinsteiber
 * Mikhail Panichev
 * An-Ni Wang
+* Chris Cinelli
 
 Props to [Carl Henderson](https://github.com/chuckhendo) whose [Chrome Bootstrap project](https://github.com/chuckhendo/chrome-bootstrap) was the original source, which we forked from.
 
 ## Contribute
 
 [Contribution Guidelines](CONTRIBUTING.md)
+
+## Credits
+
+* [Based on eBay Design Grid Overlay](https://github.com/cc-ebay/design-grid-overlay)
