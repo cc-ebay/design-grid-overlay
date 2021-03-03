@@ -44,17 +44,17 @@
 
 //On installation, clear all non-default extension settings data
 chrome.runtime.onInstalled.addListener(function () {
-    chrome.storage.sync.get(function(allData){
+  chrome.storage.sync.get(function (allData) {
 
-        var defaultSettings = allData['default'];
+    var defaultSettings = allData[DEFAULT_SETTINGS_KEY];
 
-        chrome.storage.sync.clear(function(){
-            if(defaultSettings) {
-                chrome.storage.sync.set({'default': defaultSettings});
-            }
-        });
-
+    chrome.storage.sync.clear(function () {
+      if (defaultSettings) {
+        chrome.storage.sync.set({ [DEFAULT_SETTINGS_KEY]: defaultSettings });
+      }
     });
+
+  });
 });
 
 /**
@@ -63,14 +63,14 @@ chrome.runtime.onInstalled.addListener(function () {
  */
 
 chrome.browserAction.setTitle({
-    title:'Use ( Ctrl / Command + Shift + A ) to activate Design Grid Overlay' 
+  title: 'Use ( Ctrl / Command + Shift + A ) to activate Design Grid Overlay'
 });
 
 
 
 //Clear tab sync storage when it is closed
-chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
-    chrome.storage.sync.remove(tabId.toString());
+chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
+  chrome.storage.sync.remove(tabId.toString());
 });
 
 
@@ -88,15 +88,15 @@ chrome.commands.onCommand.addListener(function (command) {
       break;
   }
 
-  chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+  chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
     for (var i = 0; i < tabs.length; i++) {
       if (chrome.runtime.lastError) {
-          console.warn("Whoops.. " + chrome.runtime.lastError.message);
+        console.warn("Whoops.. " + chrome.runtime.lastError.message);
       } else {
-          if (tabs[i]) {
-              var currentId = tabs[i].id;
+        if (tabs[i]) {
+          var currentId = tabs[i].id;
               chrome.tabs.sendMessage(currentId, {method: method, tabId: currentId});
-          }
+        }
       }
     }
   });

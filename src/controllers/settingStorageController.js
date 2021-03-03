@@ -13,12 +13,6 @@ var settingStorageController = (function () {
     var EMPTY_VALUE = "EMPTY_VALUE";
 
     /**
-     * Key used to store common global defaults for our extension
-     * @type {string}
-     */
-    var DEFAULT_SETTINGS_KEY = "default";
-
-    /**
      * HTML Element that contains our tab buttons
      */
     var tabContentContainer = null;
@@ -144,15 +138,7 @@ var settingStorageController = (function () {
 
         currentChromeTabId = currentChromeTabId.toString();
 
-        chrome.storage.sync.get([currentChromeTabId, DEFAULT_SETTINGS_KEY], function (storedData) {
-
-
-            //Override the local var with the actual data we want to load, which is for this specific tab
-            //The local data storage is stored by keys that are our TabID's given to us by chrome
-            //This call retrieves from the global defaults data as a backup if no tab data is present, and if no default
-            //has been stored, it reverts to a blank data object to be filled in.
-            storedData = storedData[currentChromeTabId] || storedData[DEFAULT_SETTINGS_KEY] || {formData: {}};
-
+        storageLoad(currentChromeTabId, function (storedData) {
 
             // Load active UI tab data
             loadTabState(storedData);

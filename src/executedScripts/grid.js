@@ -12,8 +12,9 @@
      */
     function helloListener(request, sender, sendResponse) {
 
-        if (request.greeting == "hello")
+        if (request.greeting == "hello") {
             sendResponse({message: "hi"});
+    }
     }
     chrome.runtime.onMessage.addListener(helloListener);
     chromeMessageListeners.push(helloListener);
@@ -24,8 +25,8 @@
      */
     function createListener(request, sender, sendResponse) {
         if (request.method == "create") {
-            chrome.storage.sync.get(request.tabId.toString(), function (item) {
-                var numColumns = item[request.tabId.toString()].formData.gridForm.settings.largeColumns || 16;
+            storageLoad(request.tabId.toString(), function (item) {
+                var numColumns = item.formData.gridForm.settings.largeColumns || 16;
 
                 var div = document.createElement('div');
                 div.setAttribute("class", "cb-grid-lines");
@@ -122,7 +123,8 @@
 
     function enableHorizontalLinesListener(request, sender, sendResponse) {
         if (request.method == "enableHorizontalLines") {
-            chrome.storage.sync.get(request.tabId.toString(), function (item) {
+            console.log('enableHorizontalLines');
+            storageLoad(request.tabId.toString(), function (item) {
                 horizontalLinesContainer = document.querySelector('.grid-overlay-horizontal');
 
                 if (!horizontalLinesContainer) {
@@ -132,7 +134,7 @@
                 }
 
                 // remember initial (user) offset
-                horizontalLinesContainer.dataset.hloffset = item[request.tabId.toString()].formData.gridForm.settings.offsetY;
+                horizontalLinesContainer.dataset.hloffset = item.formData.gridForm.settings.offsetY;
 
                 window.addEventListener('scroll', documentScrollListener, false);
                 respondHorizontalLines(1);
