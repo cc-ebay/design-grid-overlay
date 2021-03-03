@@ -3,18 +3,20 @@ Design Grid Overlay
 
 A Chrome extension to overlay a design grid on your web page; configurable to fit many design scenarios.  
 
+![Screenshot Chrome Extention](https://user-images.githubusercontent.com/64445558/109747474-05ed2e80-7b8c-11eb-92b8-bae76781d436.png)
+
 ## Installation
 
 Install from source:
 
-* Clone the git repository to your local machine or download the zip file [ZIP](https://github.com/cc-cc-ebay/design-grid-overlay/archive/master.zip) and unzip the folder.
+* Clone the git repository to your local machine or download the zip file [ZIP](https://github.com/cc-ebay/design-grid-overlay/archive/master.zip) and unzip the folder.
 * After the folder is on your desktop, open Chrome.
 * Once Chrome is open, click the hamburger menu on the far right go to More tools, then click [Extensions](chrome://extensions/).
 * Once there, be sure the "Developer mode" box is checked and then at the top click "Load unpacked extension".
 * Once clicked navagiate to the grid plugin folder on your computer and press select.
 * Once selected the plugin should appear at the top of your chrome browser.
 * Click the extension image to activate it or use Mac - command+shift+A, Windows - Ctrl+Shift+A to activate the extension.
-* Use Command + Shift + K to toggle Vertical Grid Overlay
+* Use Command + Shift + A to toggle Vertical Grid Overlay
 * Use Command + Shift + H to toggle Horizontal Grid Overlay
 * Hold Shift Key to go up/down 10px for all input fields in setting tab
 
