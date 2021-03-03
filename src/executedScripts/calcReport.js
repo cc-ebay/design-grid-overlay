@@ -1,5 +1,3 @@
-var chrome = chrome || {};
-
 (function () {
     /**
      * Array of function references to our Chrome Runtime Message Listeners. We use this
