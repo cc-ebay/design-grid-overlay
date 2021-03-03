@@ -11,7 +11,7 @@
     "default_popup": "src/popup.html"
   },
   "background": {
-    "scripts": ["src/executedScripts/background.js"],
+    "scripts": ["src/common.js", "src/executedScripts/background.js"],
     "persistent": false
   },
   "web_accessible_resources": [
