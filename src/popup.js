@@ -318,6 +318,22 @@ var popup = (function () {
         };
     };
 
+    function updateAll(tabId, settings) {        
+        reportController.calculateReport(tabId, 
+            settings.formData.gridForm.settings, 
+            settings.formData.advancedForm.settings);
+        reportController.updateReportOverlay(tabId, gridToggle.checked,
+            settings.formData.reportForm.settings, 
+            settings.formData.advancedForm.settings);
+    }
+
+    // Load all stored settings from chrome local storage, and then update the report overlay
+    function updateAllFromSettings(tabId) {
+        settingStorageController.loadSettings(tabId, function (settings) {
+            updateAll(tabId, settings);
+        });
+    }
+
     /**
      * Used to initialize the state of the popup window and inject in-page scripts.
      * Saves the current tab state, generates the grid, and calculates the report.
@@ -330,30 +346,15 @@ var popup = (function () {
          * Heartbeat pattern to determine whether content script is already inject
          * If not it will be injected.
          */
-        chrome.tabs.sendMessage(currentChromeTabId, {greeting: "hello"}, function (response) {
-
+        chrome.tabs.sendMessage(currentChromeTabId, {greeting: "hello"}, function (response) { 
             if (response) {
                 console.log("Design Grid Overlay JS already injected.");
 
-                // Load all stored settings from chrome local storage, and then update the report overlay
-                settingStorageController.loadSettings(currentChromeTabId, function (settings) {
-                    reportController.calculateReport(currentChromeTabId, settings.formData.gridForm.settings, settings.formData.advancedForm.settings);
-                    reportController.updateReportOverlay(currentChromeTabId, gridToggle.checked,
-                        settings.formData.reportForm.settings, settings.formData.advancedForm.settings);
-                });
+                updateAllFromSettings(currentChromeTabId);
             }
             else {
-                console.log("Design Grid Overlay JS not already injected, injecting now.");
-                chrome.tabs.executeScript(currentChromeTabId, {file: "src/executedScripts/grid.js"});
-                chrome.tabs.executeScript(currentChromeTabId, {file: "src/executedScripts/calcReport.js"}, function () {
-
-
-                    // Load all stored settings from chrome local storage, and then update the report overlay
-                    settingStorageController.loadSettings(currentChromeTabId, function (settings) {
-                        reportController.calculateReport(currentChromeTabId, settings.formData.gridForm.settings, settings.formData.advancedForm.settings);
-                        reportController.updateReportOverlay(currentChromeTabId, gridToggle.checked,
-                            settings.formData.reportForm.settings, settings.formData.advancedForm.settings);
-                    });
+                injectScripts(currentChromeTabId, function () {
+                    updateAllFromSettings(currentChromeTabId);
                 });
             }
         });
