@@ -40,7 +40,7 @@
 
       chrome.tabs.executeScript(currentChromeTabId, {file: "src/common.js"}, () => {
         chrome.tabs.executeScript(currentChromeTabId, {file: "src/executedScripts/grid.js"}, () => {
-          chrome.tabs.executeScript(currentChromeTabId, {file: "src/controllers/gridController.js"}, () => {
+          chrome.tabs.executeScript(currentChromeTabId, {file: "src/executedScripts/calcReport.js"}, () => {
             if(cb) cb();
           });
         });
